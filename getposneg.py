@@ -11,9 +11,17 @@ def getposneg(searchword,str):
 	pos = []
 	neg = []
 	found = 0
+	#interuption
+	if searchword == "addictive":
+		return 1 
+	if searchword == "top":
+		return 1
+	if searchword == "dump":
+		return -1
+
 	for row in csv.DictReader(k):
 		if row['Word'] == searchword:
-			#if row['Attr'] != 'n':
+				#if row['Attr'] != 'n':
 			if 'JJ' in str:
 				if row['Attr'] == 'a':
 					pos.append(float(row['Pos']))
@@ -37,13 +45,21 @@ def getposneg(searchword,str):
 		# return -1
 	# else:
 		# return 0
-	elif sum(pos) - sum(neg) > 0.05:
+	"""elif sum(pos) - sum(neg) > 0:
 		return 1
-	elif sum(pos) - sum(neg) <-0.05:
+	elif sum(pos) - sum(neg) <0:
 		return -1
+	else:print searchword,
+		return 0"""
+	print searchword
+	if numpy.mean(pos)>numpy.mean(neg):
+		return max(numpy.mean(pos),numpy.mean(neg))
+	elif numpy.mean(pos)<numpy.mean(neg):
+		return (-1)*max(numpy.mean(pos),numpy.mean(neg))
 	else:
-		return 0
+		return 0 
+
 	k.close()
 
 
-#print getposneg("food","NN")
+print getposneg("top","JJ")
