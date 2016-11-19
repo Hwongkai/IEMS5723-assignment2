@@ -14,7 +14,7 @@ while 1:
 	else:
 		test.append(line)
 file.close()
-
+print len(test)
 result=[]
 label = []
 for item in test:
